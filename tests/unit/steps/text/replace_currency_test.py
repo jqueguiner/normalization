@@ -23,6 +23,6 @@ def test_replace_currency_step_replaces_currency_with_decimal_separator(
     """
     Test that the replace currency step replaces the currency with the decimal separator.
     """
-    text = "100XDECIMALX50€"
+    text = "100.50€"
     replaced_text = ReplaceCurrencyStep()(text, operators)
-    assert replaced_text == "100XDECIMALX50 euros"
+    assert replaced_text == "100.50 euros"

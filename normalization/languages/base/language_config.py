@@ -25,6 +25,9 @@ Include both canonical forms and common spoken aliases.
 Example (English): {'zero': '0', 'oh': '0', 'o': '0', 'one': '1', ..., 'nine': '9'}
 """
 
+CurrencySymbols: TypeAlias = dict[str, str]
+"""Maps currency symbols to their corresponding words."""
+
 
 @dataclass
 class LanguageConfig:
@@ -36,18 +39,10 @@ class LanguageConfig:
     """Word used for decimal separator."""
     dot_word: str
     """Word used when reading a literal dot."""
+    currency_symbol_to_word: CurrencySymbols
+    """Maps currency symbols to their corresponding words."""
     thousand_separator: str
     """Thousands separator character."""
-    euro_word: str
-    """Word for euro symbol : €"""
-    dollar_word: str
-    """Word for dollar symbol : $"""
-    pound_word: str
-    """Word for pound symbol : £"""
-    cent_word: str
-    """Word for cent symbol : ¢"""
-    yen_word: str
-    """Word for yen symbol : ¥"""
     at_word: str
     """Word for '@'."""
     percent_words: list[str]

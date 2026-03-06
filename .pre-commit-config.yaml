@@ -17,7 +17,11 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  - repo: https://github.com/hoxbro/ty-pre-commit
-    rev: v0.0.20
+  - repo: local
     hooks:
       - id: ty-check
+        name: ty check
+        entry: uv run ty check
+        language: system
+        types: [python]
+        pass_filenames: false
