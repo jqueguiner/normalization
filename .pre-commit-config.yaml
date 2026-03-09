@@ -17,7 +17,12 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  - repo: https://github.com/hoxbro/ty-pre-commit
-    rev: v0.0.20
+  # Remove this once ty pre-commit hook is released
+  - repo: local
     hooks:
-      - id: ty-check
+      - id: ty
+        name: ty check
+        entry: uvx ty check .
+        language: system
+        pass_filenames: false
+        always_run: true
