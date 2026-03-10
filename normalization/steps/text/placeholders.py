@@ -41,10 +41,6 @@ class ProtectEmailSymbolsStep(TextStep):
 class RestoreEmailAtSymbolWithWordStep(TextStep):
     """Restore XATX placeholder with the language-specific 'at' word.
 
-    Uses TextStep directly: ProtectEmailSymbolsStep inserts spaces around the
-    placeholder, so restoration uses re.sub with \\s* to absorb them.
-    RestoreStep only does a plain str.replace, which would leave double spaces.
-
     When no word is configured for '@', restores the original '@' character
     so that placeholders never leak into the final output.
     """
@@ -68,9 +64,8 @@ class RestoreEmailAtSymbolWithWordStep(TextStep):
 class RestoreEmailDotSymbolWithWordStep(TextStep):
     """Restore XDOTX placeholder with the language-specific 'dot' word.
 
-    Uses TextStep directly: same reason as RestoreEmailAtSymbolWithWordStep — spaces were inserted around the placeholder during protection.
-
-    When no word is configured for '.', restores the original '.' character so that placeholders never leak into the final output.
+    When no word is configured for '.', restores the original '.' character
+    so that placeholders never leak into the final output.
     """
 
     name = "restore_email_dot_symbol_with_word"
