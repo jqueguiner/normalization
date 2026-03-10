@@ -33,7 +33,8 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           python-version: "3.13"
-      - run: uvx ty check
+      - run: uv sync --group dev
+      - run: uvx ty check .
 
   test:
     name: Tests (pytest)
