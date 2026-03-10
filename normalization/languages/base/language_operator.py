@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from normalization.languages.base.language_config import LanguageConfig
 
 _DEFAULT_CONFIG = LanguageConfig(code="default")
