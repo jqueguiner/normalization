@@ -55,6 +55,7 @@ This ordering is a hard constraint — some steps depend on earlier steps having
 3. Add an import to `steps/text/__init__.py` or `steps/word/__init__.py`.
 4. Add unit tests under `tests/unit/steps/`.
 5. Add the step name to the relevant preset YAML, or create a new preset version.
+6. If you added or changed the class docstring, regenerate `docs/steps.md` by running `uv run scripts/generate_step_docs.py`.
 
 ### Choosing a base class
 
