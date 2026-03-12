@@ -1,0 +1,45 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ contains(github.ref_name, '-') && 'testpypi' || 'pypi' }}
+      url: ${{ contains(github.ref_name, '-') && 'https://test.pypi.org/p/gladia-normalization' || 'https://pypi.org/p/gladia-normalization' }}
+    permissions:
+      contents: read
+      id-token: write  # required for Trusted Publisher (OIDC)
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.13"
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Update version in pyproject.toml
+        run: |
+          sed -i 's/^version = ".*"/version = "${{ steps.version.outputs.VERSION }}"/' pyproject.toml
+
+      - name: Build
+        run: uv build
+
+      - name: Publish to TestPyPI (pre-release)
+        if: contains(github.ref_name, '-')
+        run: uv publish --index https://test.pypi.org/legacy/
+        # Token alternative: UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+
+      - name: Publish to PyPI (stable)
+        if: ${{ !contains(github.ref_name, '-') }}
+        run: uv publish
+        # Token alternative: UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
