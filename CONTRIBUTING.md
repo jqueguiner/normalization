@@ -83,7 +83,7 @@ class MyTextStep(TextStep):
         ...
 ```
 
-**`ProtectStep`** — a specialisation of `TextStep` for the common case of replacing a character with a placeholder token. You only implement `_pattern`, which returns a compiled regex with **exactly two capture groups** (what comes before and after the character being replaced). The `__call__` is fixed: it applies the pattern as `\1{placeholder}\2`.
+**`ProtectStep`** — a specialization of `TextStep` for the common case of replacing a character with a placeholder token. You only implement `_pattern`, which returns a compiled regex with **exactly two capture groups** (what comes before and after the character being replaced). The `__call__` is fixed: it applies the pattern as `\1{placeholder}\2`.
 
 ```python
 @register_step
@@ -99,7 +99,7 @@ Use `ProtectStep` when: one regex pattern maps to exactly one placeholder substi
 
 Fall back to `TextStep` directly when: a single pass must protect two different symbols (like email `@` and `.`), the replacement needs to absorb surrounding whitespace with `\s*`, or the replacement is a per-match function rather than a fixed template.
 
-**`RestoreStep`** — a specialisation of `TextStep` for restoring a placeholder back to a string. You only implement `_replacement`, which returns the string to substitute in. The `__call__` does a plain `str.replace` of the placeholder (and its casefolded form).
+**`RestoreStep`** — a specialization of `TextStep` for restoring a placeholder back to a string. You only implement `_replacement`, which returns the string to substitute in. The `__call__` does a plain `str.replace` of the placeholder (and its case-folded form).
 
 ```python
 @register_step
