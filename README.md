@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/pypi/v/gladia-normalization?style=flat-square" alt="PyPI version" />
-  <img src="https://img.shields.io/pypi/pyversions/gladia-normalization?style=flat-square" alt="Python versions" />
+  <img src="https://img.shields.io/pypi/v/gladia_normalization?style=flat-square" alt="PyPI version" />
+  <img src="https://img.shields.io/pypi/pyversions/gladia_normalization?style=flat-square" alt="Python versions" />
   <img src="https://img.shields.io/github/license/gladiaio/normalization?style=flat-square" alt="License" />
 </p>
 
