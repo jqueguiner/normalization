@@ -89,8 +89,10 @@ def _build_compiled_patterns(operators: LanguageOperators) -> _CompiledPatterns:
         if am_word is not None and pm_word is not None:
             prefix_class = _ampm_prefix_class(am_word, pm_word)
             oclock_ampm = (
-                re.compile(rf"(\d{{1,2}}):00\s+({prefix_class}m)"),
-                lambda m: f"{m.group(1)} {m.group(2)}",
+                re.compile(
+                    rf"(\d{{1,2}}):00\s+({prefix_class})\.?m\.?\b", re.IGNORECASE
+                ),
+                lambda m: f"{m.group(1)} {m.group(2)}m",
             )
 
     return _CompiledPatterns(
