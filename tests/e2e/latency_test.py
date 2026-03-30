@@ -17,16 +17,15 @@ def test_gladia_3_latency(language: str) -> None:
     pipeline = load_pipeline("gladia-3", language)
 
     start_time = time.time()
-    for _ in range(_ITERATIONS):
+    for i in range(_ITERATIONS):
         pipeline.normalize(_SAMPLE_TEXT)
         if time.time() - start_time > _MAX_TOTAL_SECONDS:
+            print(
+                f"[{language}] {i} normalizations took more than {_MAX_TOTAL_SECONDS}s"
+            )
             break
     elapsed = time.time() - start_time
 
-    print(
-        f"\nLatency ({language}): {elapsed:.3f}s for {_ITERATIONS} iterations "
-        f"({elapsed / _ITERATIONS * 1000:.2f}ms/call)"
-    )
     assert elapsed < _MAX_TOTAL_SECONDS, (
         f"[{language}] {_ITERATIONS} normalizations took {elapsed:.2f}s "
         f"(limit: {_MAX_TOTAL_SECONDS}s)"
